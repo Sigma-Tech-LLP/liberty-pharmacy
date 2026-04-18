@@ -108,23 +108,8 @@ export function InquirySection() {
               />
             </FormGroup>
 
-            <button
-              type="submit"
-              disabled={pending}
-              className="mt-4 w-full bg-teal text-navy-dark font-sans font-semibold py-4 rounded-lg hover:bg-[#66e0d0] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
-            >
-              {pending ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-navy-dark/30 border-t-navy-dark rounded-full animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                "Submit Inquiry"
-              )}
-            </button>
+            <ClientEffects pending={pending} />
           </form>
-
-          <ClientEffects />
         </div>
 
         {/* Contact info */}
