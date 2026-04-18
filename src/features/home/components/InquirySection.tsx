@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
+import { toast } from "sonner";
 import { MapPin, Phone, MessageCircle, AlertCircle, CheckCircle2 } from "lucide-react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -19,9 +20,12 @@ export function InquirySection() {
 
   useEffect(() => {
     if (state?.success) {
+      toast.success("Thank you! Your inquiry has been submitted successfully.");
       formRef.current?.reset();
+    } else if (state?.error) {
+      toast.error(state.error);
     }
-  }, [state?.success]);
+  }, [state]);
 
   return (
     <section
@@ -43,19 +47,7 @@ export function InquirySection() {
         {/* Form */}
         <div className="bg-white/[0.03] border border-border rounded-[20px] p-12 reveal opacity-0 translate-y-8 transition-[opacity,transform] duration-700 ease-out max-md:p-5">
           <form action={formAction} ref={formRef} className="flex flex-col gap-4">
-            {state?.success && (
-              <div className="bg-teal/10 border border-teal/20 text-teal px-4 py-3 rounded-lg flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-                <p className="text-sm">Thank you! Your inquiry has been submitted successfully.</p>
-              </div>
-            )}
-            
-            {state?.error && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg flex items-center gap-3">
-                <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <p className="text-sm">{state.error}</p>
-              </div>
-            )}
+
 
             <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
               <FormGroup label="Full Name *">
