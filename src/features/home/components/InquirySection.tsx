@@ -1,15 +1,28 @@
-import { MapPin, Phone, MessageCircle } from "lucide-react";
+"use client";
+
+import { useActionState, useEffect, useRef } from "react";
+import { MapPin, Phone, MessageCircle, AlertCircle, CheckCircle2 } from "lucide-react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { FormGroup } from "@/components/ui/FormGroup";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { ClientEffects } from "@/components/ClientEffects";
 import { WHATSAPP_URL, COMPANY } from "@/lib/constants";
+import { submitInquiry } from "@/app/actions/inquiry";
 
 const INPUT_CLASSES =
   "w-full bg-white/[0.05] border border-white/10 rounded-lg px-4 py-3.5 text-off-white font-sans text-sm outline-none transition-all duration-200 focus:border-teal focus:bg-teal/[0.05]";
 
 export function InquirySection() {
+  const [state, formAction, pending] = useActionState(submitInquiry, null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state?.success) {
+      formRef.current?.reset();
+    }
+  }, [state?.success]);
+
   return (
     <section
       id="inquiry"
@@ -29,55 +42,87 @@ export function InquirySection() {
       <div className="grid grid-cols-2 gap-16 mt-[60px] items-start max-md:grid-cols-1 max-md:gap-8">
         {/* Form */}
         <div className="bg-white/[0.03] border border-border rounded-[20px] p-12 reveal opacity-0 translate-y-8 transition-[opacity,transform] duration-700 ease-out max-md:p-5">
-          <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-            <FormGroup label="Full Name *">
-              <input type="text" className={INPUT_CLASSES} placeholder="Your full name" />
+          <form action={formAction} ref={formRef} className="flex flex-col gap-4">
+            {state?.success && (
+              <div className="bg-teal/10 border border-teal/20 text-teal px-4 py-3 rounded-lg flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                <p className="text-sm">Thank you! Your inquiry has been submitted successfully.</p>
+              </div>
+            )}
+            
+            {state?.error && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                <p className="text-sm">{state.error}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+              <FormGroup label="Full Name *">
+                <input type="text" name="fullName" className={INPUT_CLASSES} placeholder="Your full name" required />
+              </FormGroup>
+              <FormGroup label="Company *">
+                <input type="text" name="company" className={INPUT_CLASSES} placeholder="Company / Organization" required />
+              </FormGroup>
+            </div>
+            <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+              <FormGroup label="Country *">
+                <input type="text" name="country" className={INPUT_CLASSES} placeholder="Your country" required />
+              </FormGroup>
+              <FormGroup label="Phone / WhatsApp *">
+                <input type="tel" name="phone" className={INPUT_CLASSES} placeholder="+1 234 567 8900" required />
+              </FormGroup>
+            </div>
+            <FormGroup label="Email Address *">
+              <input type="email" name="email" className={INPUT_CLASSES} placeholder="your@email.com" required />
             </FormGroup>
-            <FormGroup label="Company *">
-              <input type="text" className={INPUT_CLASSES} placeholder="Company / Organization" />
+            <FormGroup label="Product Name / List *">
+              <input type="text" name="productList" className={INPUT_CLASSES} placeholder="e.g. Paracetamol 500mg, Amoxicillin 250mg..." required />
             </FormGroup>
-          </div>
-          <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-            <FormGroup label="Country *">
-              <input type="text" className={INPUT_CLASSES} placeholder="Your country" />
+            <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+              <FormGroup label="Quantity">
+                <input type="text" name="quantity" className={INPUT_CLASSES} placeholder="e.g. 10,000 strips" />
+              </FormGroup>
+              <FormGroup label="Brand / Generic">
+                <select name="brandGeneric" className={`form-select ${INPUT_CLASSES}`} defaultValue="">
+                  <option value="">Select...</option>
+                  <option value="Branded">Branded</option>
+                  <option value="Generic">Generic</option>
+                  <option value="Both">Both</option>
+                </select>
+              </FormGroup>
+            </div>
+            <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+              <FormGroup label="Packaging">
+                <input type="text" name="packaging" className={INPUT_CLASSES} placeholder="e.g. Blister, Bottle" />
+              </FormGroup>
+              <FormGroup label="Destination Port">
+                <input type="text" name="destinationPort" className={INPUT_CLASSES} placeholder="e.g. Dubai, Lagos" />
+              </FormGroup>
+            </div>
+            <FormGroup label="Additional Message">
+              <textarea
+                name="message"
+                className={`${INPUT_CLASSES} resize-y min-h-[100px]`}
+                placeholder="Any specific requirements, regulatory needs, or questions..."
+              />
             </FormGroup>
-            <FormGroup label="Phone / WhatsApp *">
-              <input type="tel" className={INPUT_CLASSES} placeholder="+1 234 567 8900" />
-            </FormGroup>
-          </div>
-          <FormGroup label="Email Address *">
-            <input type="email" className={INPUT_CLASSES} placeholder="your@email.com" />
-          </FormGroup>
-          <FormGroup label="Product Name / List *">
-            <input type="text" className={INPUT_CLASSES} placeholder="e.g. Paracetamol 500mg, Amoxicillin 250mg..." />
-          </FormGroup>
-          <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-            <FormGroup label="Quantity">
-              <input type="text" className={INPUT_CLASSES} placeholder="e.g. 10,000 strips" />
-            </FormGroup>
-            <FormGroup label="Brand / Generic">
-              <select className={`form-select ${INPUT_CLASSES}`} defaultValue="">
-                <option value="">Select...</option>
-                <option>Branded</option>
-                <option>Generic</option>
-                <option>Both</option>
-              </select>
-            </FormGroup>
-          </div>
-          <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-            <FormGroup label="Packaging">
-              <input type="text" className={INPUT_CLASSES} placeholder="e.g. Blister, Bottle" />
-            </FormGroup>
-            <FormGroup label="Destination Port">
-              <input type="text" className={INPUT_CLASSES} placeholder="e.g. Dubai, Lagos" />
-            </FormGroup>
-          </div>
-          <FormGroup label="Additional Message">
-            <textarea
-              className={`${INPUT_CLASSES} resize-y min-h-[100px]`}
-              placeholder="Any specific requirements, regulatory needs, or questions..."
-            />
-          </FormGroup>
+
+            <button
+              type="submit"
+              disabled={pending}
+              className="mt-4 w-full bg-teal text-navy-dark font-sans font-semibold py-4 rounded-lg hover:bg-[#66e0d0] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+            >
+              {pending ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-navy-dark/30 border-t-navy-dark rounded-full animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit Inquiry"
+              )}
+            </button>
+          </form>
 
           <ClientEffects />
         </div>
