@@ -62,19 +62,28 @@ export function InquirySection() {
 
             {/* Elegant Contact Details */}
             <div className="space-y-6">
-              <div className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-navy group-hover:text-white transition-all">
-                  <MapPin size={16} />
-                </div>
-                <span className="text-sm font-medium text-navy/70">Bandra West, Mumbai, India</span>
-              </div>
-              <div className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-teal group-hover:text-white transition-all">
-                  <WhatsAppIcon size={16} />
-                </div>
-                <span className="text-sm font-medium text-navy/70">+91 91361 58212</span>
-              </div>
-            </div>
+  {/* Location Item */}
+  <div className="flex items-center gap-4 group cursor-pointer">
+    <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center 
+                    text-navy/70 group-hover:bg-navy group-hover:text-white transition-all duration-300">
+      <MapPin size={16}/>
+    </div>
+    <span className="text-sm font-medium text-navy/70 group-hover:text-navy transition-colors">
+      Bandra West, Mumbai, India
+    </span>
+  </div>
+
+  {/* WhatsApp Item */}
+  <div className="flex items-center gap-4 group cursor-pointer">
+    <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center 
+                    text-teal group-hover:bg-teal group-hover:text-white transition-all duration-300">
+      <WhatsAppIcon size={16} />
+    </div>
+    <span className="text-sm font-medium text-navy/70 group-hover:text-teal transition-colors">
+      +91 91361 58212
+    </span>
+  </div>
+</div>
           </div>
 
           {/* RIGHT: The Minimalist Form Card */}
@@ -133,7 +142,6 @@ export function InquirySection() {
                     Instant Quote
                   </a>
                 </div>
-                <ClientEffects pending={pending} />
               </form>
             </motion.div>
           </div>
