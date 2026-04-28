@@ -7,10 +7,11 @@ import { ProcessSection } from "@/features/home/components/ProcessSection";
 import { WhyChooseSection } from "@/features/home/components/WhyChooseSection";
 import { InquirySection } from "@/features/home/components/InquirySection";
 import { RetailSection } from "@/features/home/components/RetailSection";
+import { ScrollProvider } from "@/components/ScrollProvider";
 
 export default function Home() {
   return (
-    <>
+    <ScrollProvider>
       <Navbar />
       <HeroSection />
       <TrustBar />
@@ -20,6 +21,6 @@ export default function Home() {
       <InquirySection />
       <RetailSection />
       <Footer />
-    </>
+    </ScrollProvider>
   );
 }

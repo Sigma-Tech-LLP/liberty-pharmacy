@@ -1,69 +1,118 @@
-import { ClipboardList } from "lucide-react";
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Plus, ClipboardList } from "lucide-react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { SectionTitle } from "@/components/ui/SectionTitle";
 import { categories } from "../data/categories";
 
 export function CategoriesSection() {
-  return (
-    <section
-      id="categories"
-      className="px-[60px] py-[100px] bg-gradient-to-b from-navy to-navy-mid max-md:px-6 max-md:py-[60px]"
-    >
-      <div className="flex justify-between items-end mb-14 flex-wrap gap-6">
-        <div>
-          <SectionLabel>Our Catalog</SectionLabel>
-          <SectionTitle>
-            Product <strong>Categories</strong>
-          </SectionTitle>
-          <p className="text-base text-brand-gray leading-[1.7] max-w-[560px]">
-            Comprehensive pharmaceutical supply across all major therapeutic and
-            surgical categories for global buyers.
-          </p>
-        </div>
-        <a
-          href="#inquiry"
-          className="bg-gradient-to-br from-teal to-teal-dark text-navy px-9 py-4 rounded-lg font-bold text-sm tracking-[1px] uppercase no-underline transition-all duration-200 shadow-[0_8px_32px_rgba(0,201,177,0.3)] hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,201,177,0.45)]"
-        >
-          Request Catalog →
-        </a>
-      </div>
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-      <div className="grid grid-cols-3 gap-5 reveal opacity-0 translate-y-8 transition-[opacity,transform] duration-700 ease-out max-md:grid-cols-1">
-        {categories.map((cat) => {
-          const Icon = cat.icon;
-          return (
-            <div
-              key={cat.name}
-              className="group bg-white/[0.03] border border-border rounded-2xl px-7 py-9 cursor-pointer transition-all duration-300 relative overflow-hidden hover:border-teal hover:bg-teal/[0.05] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] before:content-[''] before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[2px] before:bg-linear-to-r before:from-teal before:to-gold before:scale-x-0 before:origin-left before:transition-transform before:duration-300 hover:before:scale-x-100"
-            >
-              <div className="w-14 h-14 bg-teal/10 rounded-xl flex items-center justify-center mb-5 border border-teal/20 group-hover:bg-teal/20 group-hover:border-teal/40 transition-all duration-300">
-                <Icon className="w-7 h-7 text-teal" />
-              </div>
-              <div className="font-serif text-[22px] font-semibold mb-2 text-off-white">
-                {cat.name}
-              </div>
-              <div className="text-[13px] text-brand-gray leading-[1.6]">{cat.desc}</div>
-              <div className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold tracking-[1px] text-teal uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Inquire Now →
-              </div>
+  return (
+    
+    <section id="categories" className="py-24 bg-white px-[60px] max-md:px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-12 gap-12">
+          
+          {/* Left Side: Sticky Info */}
+          <div className="col-span-4 max-lg:col-span-12 lg:sticky lg:top-32 h-fit">
+            <SectionLabel>Portfolio</SectionLabel>
+            <h2 className="font-serif text-5xl font-light text-navy mt-4 leading-tight">
+              Therapeutic <br /> 
+              <span className="font-bold">Segments</span>
+            </h2>
+            <p className="text-brand-gray mt-6 text-lg leading-relaxed">
+              Precision classification of our pharmaceutical exports. 
+              Move your cursor over the segments to preview.
+            </p>
+          </div>
+
+          {/* Right Side: Fixed-Width Interactive List */}
+          <div className="col-span-8 max-lg:col-span-12">
+            <div className="border-t border-border">
+              {categories.map((cat, idx) => (
+                <div
+                  key={cat.name}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="group relative border-b border-border py-10 cursor-pointer"
+                >
+                  {/* Background Hover Glow - Uses LayoutId to animate smoothly between rows */}
+                  {hoveredIndex === idx && (
+                    <motion.div 
+                      layoutId="hoverBg"
+                      className="absolute inset-0 bg-light-bg/50 -z-10"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    />
+                  )}
+
+                  {/* Main Row Container - Justify-Between ensures the Icon never moves */}
+                  <div className="flex items-center justify-between px-4">
+                    
+                    {/* Left: Index and Title */}
+                    <div className="flex items-center gap-8 shrink-0">
+                      <span className="font-mono text-sm text-teal/40 font-bold w-6">
+                        0{idx + 1}
+                      </span>
+                      <h3 className="text-3xl font-serif text-navy transition-all duration-500 group-hover:text-teal group-hover:translate-x-2">
+                        {cat.name}
+                      </h3>
+                    </div>
+
+                    {/* Center: Description (Absolute to prevent pushing the Plus icon) */}
+                    <div className="flex-1 px-12 relative hidden xl:block">
+                      <AnimatePresence mode="wait">
+                        {hoveredIndex === idx && (
+                          <motion.p
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -10 }}
+                            transition={{ duration: 0.3 }}
+                            className="text-[13px] text-brand-gray leading-relaxed absolute inset-y-0 flex items-center italic"
+                          >
+                            {cat.desc}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* Right: Interaction Icon (Anchored) */}
+                    <div className="shrink-0 flex items-center justify-center">
+                      <div className={`w-12 h-12 rounded-full border border-border flex items-center justify-center transition-all duration-500 transform-gpu ${hoveredIndex === idx ? 'bg-navy border-navy rotate-45 scale-110 shadow-lg shadow-navy/10' : ''}`}>
+                        <Plus size={20} className={hoveredIndex === idx ? 'text-white' : 'text-navy'} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Sourcing CTA - Modern full-width bar */}
+              <motion.div 
+                whileHover={{ scale: 1.01 }}
+                className="mt-12 p-10 bg-navy rounded-[2rem] flex items-center justify-between group cursor-pointer overflow-hidden relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-teal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="flex items-center gap-8 relative z-10">
+                  <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10">
+                    <ClipboardList className="text-teal" size={28} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-2xl tracking-tight">Custom Sourcing Requirements</h4>
+                    <p className="text-white/50 text-sm mt-1">Leverage our direct Pan-India manufacturing network.</p>
+                  </div>
+                </div>
+                
+                <div className="w-14 h-14 rounded-full bg-white text-navy flex items-center justify-center relative z-10 transition-transform group-hover:translate-x-2">
+                  <ArrowUpRight size={24} />
+                </div>
+              </motion.div>
             </div>
-          );
-        })}
-        {/* Custom Requirements card */}
-        <div className="group bg-teal/[0.06] border border-teal rounded-2xl px-7 py-9 cursor-pointer transition-all duration-300 relative overflow-hidden hover:border-teal hover:bg-teal/[0.05] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] before:content-[''] before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[2px] before:bg-linear-to-r before:from-teal before:to-gold before:scale-x-100 before:origin-left">
-          <div className="w-14 h-14 bg-teal/20 rounded-xl flex items-center justify-center mb-5 border border-teal/40">
-            <ClipboardList className="w-7 h-7 text-teal" />
           </div>
-          <div className="font-serif text-[22px] font-semibold mb-2 text-off-white">
-            Custom Requirements
-          </div>
-          <div className="text-[13px] text-brand-gray leading-[1.6]">
-            Can&apos;t find what you need? Share your product list and we&apos;ll
-            source it from our PAN India network.
-          </div>
-          <div className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold tracking-[1px] text-teal uppercase opacity-100 transition-opacity duration-300">
-            Send Requirement →
-          </div>
+
         </div>
       </div>
     </section>

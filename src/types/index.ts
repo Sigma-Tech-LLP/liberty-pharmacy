@@ -27,6 +27,7 @@ export interface TrustItem {
 export interface RetailFeature {
   icon: LucideIcon;
   label: string;
+  desc: string;
 }
 
 export interface NavLink {

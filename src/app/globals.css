@@ -1,101 +1,103 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Colors ─── */
-  --color-navy: #0a1628;
-  --color-navy-mid: #0f2040;
-  --color-teal: #00c9b1;
-  --color-teal-dark: #009d8c;
-  --color-gold: #c9a84c;
-  --color-gold-light: #e8c97a;
-  --color-off-white: #f8f9fc;
-  --color-brand-gray: #8a9bb5;
-  --color-light-bg: #f0f4fa;
-  --color-border: rgba(0, 201, 177, 0.2);
+  /* ─── Premium Color Palette ─── */
+  /* Replaced #0f4c81 with a deeper, more "Institutional" Slate-Navy for better visibility */
+  --color-navy: #020617; 
+  --color-navy-muted: #1e293b;
+  --color-navy-mid: #f1f5f9; 
+  
+  /* Vibrant "Action" Teal - Adjusted for high-contrast on both white and navy */
+  --color-teal: #0d9488; 
+  --color-teal-light: #2dd4bf;
+  
+  /* Refined Grays */
+  --color-brand-gray: #475569;
+  --color-off-white: #ffffff;
+  --color-light-bg: #f8fafc;
+  --color-border: #e2e8f0;
 
-  /* ─── Fonts ─── */
-  --font-sans: "DM Sans", sans-serif;
+  /* ─── Typography ─── */
+  --font-sans: "Inter", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", serif;
-  --font-mono: "Space Mono", monospace;
+  --font-mono: "JetBrains Mono", monospace;
 
-  /* ─── Animations ─── */
-  --animate-fade-up: fadeUp 0.8s ease both;
-  --animate-fade-up-1: fadeUp 0.8s ease 0.1s both;
-  --animate-fade-up-2: fadeUp 0.8s ease 0.2s both;
-  --animate-fade-up-3: fadeUp 0.8s ease 0.3s both;
-  --animate-fade-up-4: fadeUp 0.8s ease 0.4s both;
-  --animate-fade-up-5: fadeUp 1s ease 0.5s both;
-  --animate-pulse-dot: pulse-dot 2s infinite;
-  --animate-trust-scroll: trustScroll 30s linear infinite;
+  /* ─── Custom Bezier (Framer-style) ─── */
+  --ease-framer: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Keyframes ─── */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse-dot {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.5);
-  }
-}
-
-@keyframes trustScroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* ─── Base styles ─── */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Critical for Smooth Scroll libraries like Lenis */
+    scroll-behavior: auto !important;
+    overflow-x: hidden;
   }
 
   body {
+    @apply antialiased; /* Crisp font rendering */
     font-family: var(--font-sans);
-    background: var(--color-navy);
-    color: var(--color-off-white);
-    overflow-x: hidden;
+    background: var(--color-off-white);
+    color: #0f172a; /* Deep contrast slate-navy */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Force visibility for all primary links */
+  a {
+    @apply transition-all duration-300;
+    color: inherit;
+  }
+
+  /* Global selection color to match your teal brand */
+  ::selection {
+    background-color: rgba(13, 148, 136, 0.2);
+    color: var(--color-navy);
   }
 }
 
-/* ─── Scroll reveal ─── */
-.reveal.visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+/* ─── Premium Scroll Interactions ─── */
+
+/* Inertial Glide Fix */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-/* ─── Process step hover ─── */
-.process-step:hover .step-num {
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Custom Scrollbar - Minimalist */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
   background: var(--color-teal);
-  color: var(--color-navy);
-  transform: scale(1.1);
 }
 
-/* ─── Feature item icon hover ─── */
-.feature-item:hover .feature-icon,
-.group:hover .feature-icon {
-  background: var(--color-teal);
+/* ─── Utilities ─── */
+.text-balance {
+  text-wrap: balance;
 }
 
-/* ─── Form select dropdown ─── */
-.form-select option {
-  background: var(--color-navy-mid);
-  color: var(--color-off-white);
+/* Subtle Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }

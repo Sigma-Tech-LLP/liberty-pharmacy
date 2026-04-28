@@ -1,34 +1,56 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { trustItems } from "../data/trust-items";
 
 export function TrustBar() {
-  return (
-    <div className="bg-gradient-to-r from-navy via-navy-mid/50 to-navy border-y border-border py-5 overflow-hidden relative">
-      {/* Edge fade gradients */}
-      <div className="absolute inset-y-0 left-0 w-32 z-[2] pointer-events-none bg-gradient-to-r from-navy to-transparent" />
-      <div className="absolute inset-y-0 right-0 w-32 z-[2] pointer-events-none bg-gradient-to-l from-navy to-transparent" />
-      {/* Subtle top glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-teal/40 to-transparent" />
+  // We duplicate the items to ensure there's no "gap" during the loop
+  const duplicatedItems = [...trustItems, ...trustItems, ...trustItems, ...trustItems];
 
-      <div className="flex gap-0 w-max items-center animate-trust-scroll hover:[animation-play-state:paused] motion-reduce:animate-none">
-        {[...trustItems, ...trustItems].map((item, idx) => {
+  return (
+    <div className="bg-[#F8FAFC] border-y border-slate-200 py-8 overflow-hidden relative">
+      {/* Edge fade gradients - Premium Softness */}
+      <div className="absolute inset-y-0 left-0 w-40 z-[2] pointer-events-none bg-gradient-to-r from-[#F8FAFC] to-transparent" />
+      <div className="absolute inset-y-0 right-0 w-40 z-[2] pointer-events-none bg-gradient-to-l from-[#F8FAFC] to-transparent" />
+      
+      <motion.div 
+        className="flex items-center"
+        animate={{
+          x: ["0%", "-50%"],
+        }}
+        transition={{
+          duration: 30,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      >
+        {duplicatedItems.map((item, idx) => {
           const Icon = item.icon;
           return (
             <div
               key={`${item.label}-${idx}`}
-              className="flex items-center gap-3 text-[13px] text-brand-gray tracking-[0.5px] whitespace-nowrap px-6 group/trust"
+              className="flex items-center gap-6 px-12 whitespace-nowrap group cursor-default"
             >
-              <div className="w-9 h-9 bg-teal/10 rounded-lg flex items-center justify-center border border-teal/20 shadow-[0_0_12px_rgba(0,201,177,0.08)] group-hover/trust:bg-teal/20 group-hover/trust:border-teal/40 group-hover/trust:shadow-[0_0_20px_rgba(0,201,177,0.15)] transition-all duration-300">
-                <Icon className="w-4 h-4 text-teal" />
+              {/* Icon Container - Clean Apothecary Style */}
+              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center border border-slate-100 shadow-sm transition-all duration-500 group-hover:border-teal/30 group-hover:shadow-teal/5">
+                <Icon className="w-5 h-5 text-[#0F172A] group-hover:text-teal transition-colors" />
               </div>
-              <span className="group-hover/trust:text-off-white transition-colors duration-300">
-                {item.label}
-              </span>
-              {/* Separator dot */}
-              <span className="w-1 h-1 rounded-full bg-teal/30 ml-3" />
+              
+              <div className="flex flex-col">
+                <span className="text-[10px] text-teal font-black uppercase tracking-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-1 group-hover:translate-y-0">
+                  Verified
+                </span>
+                <span className="text-[13px] text-[#475569] font-bold tracking-[1px] uppercase group-hover:text-[#0F172A] transition-colors">
+                  {item.label}
+                </span>
+              </div>
+              
+              {/* Subtle Dot Separator instead of a hard line */}
+              <div className="ml-12 w-1.5 h-1.5 rounded-full bg-slate-200" />
             </div>
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 }

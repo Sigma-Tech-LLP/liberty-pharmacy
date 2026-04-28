@@ -10,24 +10,20 @@ export default {
     extend: {
       colors: {
         navy: {
-          DEFAULT: "#0a1628",
-          mid: "#0f2040",
+          DEFAULT: "#0f4c81", // Professional Blue (Trust)
+          mid: "#eef4fa",    // Soft Wash Blue
         },
         teal: {
-          DEFAULT: "#00c9b1",
-          dark: "#009d8c",
+          DEFAULT: "#0ea5e9", // Medical Cyan
+          dark: "#0369a1",
         },
-        gold: {
-          DEFAULT: "#c9a84c",
-          light: "#e8c97a",
-        },
-        "off-white": "#f8f9fc",
-        "brand-gray": "#8a9bb5",
-        "light-bg": "#f0f4fa",
-        border: "rgba(0, 201, 177, 0.2)",
+        "off-white": "#ffffff",
+        "brand-gray": "#64748b",
+        "light-bg": "#f8fafc", // Sterile background
+        border: "#e2e8f0",     // Clean dividers
       },
       fontFamily: {
-        sans: ['"DM Sans"', "sans-serif"],
+        sans: ['"Inter"','"DM Sans"', "sans-serif"],
         serif: ['"Cormorant Garamond"', "serif"],
         mono: ['"Space Mono"', "monospace"],
       },

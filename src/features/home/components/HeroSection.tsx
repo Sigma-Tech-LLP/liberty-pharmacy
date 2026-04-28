@@ -1,86 +1,139 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Globe, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { WHATSAPP_URL } from "@/lib/constants";
 
-export function HeroSection() {
-  return (
-    <section className="min-h-screen relative flex items-center px-[60px] pt-[120px] pb-[80px] overflow-hidden max-md:px-6 max-md:pt-[100px] max-md:pb-[60px]">
-      {/* Background layers - Deep Navy/Teal palette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_40%,rgba(0,201,177,0.08)_0%,transparent_60%),radial-gradient(ellipse_50%_80%_at_10%_80%,rgba(201,168,76,0.06)_0%,transparent_50%),linear-gradient(160deg,#0a1628_0%,#071020_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,201,177,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,201,177,0.04)_1px,transparent_1px)] bg-[size:60px_60px]" />
+const HERO_SLIDES = [
+  {
+    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?q=90&w=2000&auto=format&fit=crop",
+    title: "Global Merchant Exporter of",
+    highlight: "WHO‑GMP Pharmaceuticals",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1576091160550-2173aaf999ef?q=90&w=2000&auto=format&fit=crop",
+    title: "Bridging the Gap in",
+    highlight: "Global Healthcare Supply",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1585435557343-3b092031a831?q=90&w=2000&auto=format&fit=crop",
+    title: "Advanced Logistics for",
+    highlight: "Medical & Surgical Exports",
+  },
+];
 
-      {/* Content */}
-      <div className="relative z-[2] max-w-[780px]">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-teal/10 border border-teal/30 rounded-full px-4 py-1.5 mb-8 text-[11px] font-semibold tracking-[2px] uppercase text-teal animate-fade-up">
-          <Globe className="w-3.5 h-3.5" />
+export function HeroSection() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev === HERO_SLIDES.length - 1 ? 0 : prev + 1));
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    // Added pt-[80px] to account for the fixed Navbar height
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white pt-[80px]">
+      
+      {/* BACKGROUND CAROUSEL */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[8000ms] scale-110"
+              style={{ backgroundImage: `url(${HERO_SLIDES[current].image})` }}
+            />
+            {/* High-visibility clinical overlays */}
+            <div className="absolute inset-0 bg-white/40" /> 
+            <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* STABLE CONTENT LAYER */}
+      <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center">
+        
+        {/* Badge - Now properly spaced from Navbar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 bg-navy/5 border border-navy/10 rounded-full px-4 py-2 mb-10 text-[11px] font-bold tracking-[2px] uppercase text-navy"
+        >
+          <Globe className="w-3.5 h-3.5 text-teal" />
           India&apos;s Trusted Export Partner
+        </motion.div>
+
+        {/* Headline Box with Fixed Height (Prevents jumping buttons) */}
+        <div className="min-h-[160px] md:min-h-[200px] flex flex-col justify-center items-center w-full max-w-[950px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="w-full"
+            >
+              <h1 className="font-serif text-[clamp(32px,6vw,72px)] font-light leading-[1.1] text-navy">
+                {HERO_SLIDES[current].title} <br />
+                <span className="font-bold text-teal block mt-2 tracking-tight">
+                  {HERO_SLIDES[current].highlight}
+                </span>
+              </h1>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Headline */}
-        <h1 className="font-serif text-[clamp(42px,5.5vw,72px)] font-light leading-[1.1] mb-6 animate-fade-up-1 text-white">
-          Global Merchant Exporter of <br />
-          <strong className="font-bold bg-gradient-to-br from-teal via-teal-light to-gold-light bg-clip-text text-transparent">
-            WHO‑GMP Certified Pharmaceuticals
-          </strong>
-        </h1>
+        {/* Description - Locked below the headline box */}
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-lg md:text-xl text-brand-gray leading-relaxed max-w-[750px] mt-8 mb-12"
+        >
+          Sourcing high-quality medicines from India’s top 
+          <span className="text-navy font-semibold"> WHO‑GMP & FDA facilities</span>. 
+          Global delivery with complete regulatory compliance.
+        </motion.p>
 
-        {/* Sub-Headline */}
-        <p className="text-md text-brand-gray leading-[1.6] max-w-[640px] mb-10 animate-fade-up-2">
-          We source high‑quality medicines from India’s top 
-          <span className="text-gold-light opacity-90"> WHO‑GMP, ISO, and FDA‑approved </span> 
-          manufacturers and export them to 50+ countries with complete documentation and 24×7 support.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex gap-4 flex-wrap animate-fade-up-3">
+        {/* Buttons - These will no longer "jump" */}
+        <div className="flex gap-4 flex-wrap justify-center">
           <a
             href="#inquiry"
-            className="bg-gradient-to-br from-teal to-teal-dark text-navy px-9 py-4 rounded-lg font-bold text-sm tracking-[1px] uppercase no-underline transition-all duration-200 shadow-[0_8px_32px_rgba(0,201,177,0.3)] hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,201,177,0.45)] flex items-center gap-2"
+            className="bg-navy text-white px-10 py-4 rounded-xl font-bold text-sm tracking-[1px] uppercase no-underline transition-all hover:bg-teal hover:shadow-2xl hover:shadow-navy/20 flex items-center gap-2"
           >
-            Get Quote <ArrowRight size={16} />
+            Get Quote <ArrowRight size={18} />
           </a>
           <a
             href={WHATSAPP_URL}
-            className="bg-white/5 border border-white/10 text-white px-7 py-4 rounded-lg font-semibold text-sm no-underline flex items-center gap-2.5 transition-all duration-200 hover:bg-white/10 hover:-translate-y-0.5"
+            className="bg-white border border-border text-navy px-8 py-4 rounded-xl font-bold text-sm uppercase no-underline flex items-center gap-2.5 transition-all hover:bg-light-bg active:scale-95"
           >
-            <WhatsAppIcon size={18} />
+            <WhatsAppIcon size={20} />
             WhatsApp Us
           </a>
         </div>
-      </div>
 
-      {/* Hero stat cards - Visible on Desktop */}
-      <div className="absolute right-[60px] top-1/2 -translate-y-1/2 w-[420px] animate-fade-up-5 max-lg:hidden">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white/[0.04] border border-border rounded-2xl px-6 py-7 backdrop-blur-[10px] transition-all duration-300 hover:border-teal/50 hover:bg-teal/[0.06] row-span-2 flex flex-col justify-between">
-            <div>
-              <div className="font-mono text-4xl font-bold text-teal leading-none mb-1">50+</div>
-              <div className="text-xs text-brand-gray tracking-[1px] uppercase">Countries Served</div>
-            </div>
-            <div>
-              <div className="font-mono text-4xl font-bold text-gold-light leading-none mb-1">24×7</div>
-              <div className="text-xs text-brand-gray tracking-[1px] uppercase">Export Support</div>
-            </div>
-            <div className="flex gap-2 flex-wrap mt-3">
-              {["WHO-GMP", "ISO", "IEC"].map((cert) => (
-                <span key={cert} className="bg-gold/15 border border-gold/30 text-gold-light text-[10px] font-bold tracking-[1.5px] uppercase px-2.5 py-1 rounded">
-                  {cert}
-                </span>
-              ))}
-            </div>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="bg-white/[0.04] border border-border rounded-2xl px-6 py-7 backdrop-blur-[10px] transition-all duration-300 hover:border-teal/50 hover:bg-teal/[0.06]">
-              <div className="font-mono text-4xl font-bold text-teal leading-none mb-1">10K+</div>
-              <div className="text-xs text-brand-gray tracking-[1px] uppercase">SKUs Available</div>
-            </div>
-            <div className="bg-white/[0.04] border border-border rounded-2xl px-6 py-7 backdrop-blur-[10px] transition-all duration-300 hover:border-teal/50 hover:bg-teal/[0.06]">
-              <div className="font-mono text-[24px] font-bold text-teal leading-none mb-1">Competitive</div>
-              <div className="text-xs text-brand-gray tracking-[1px] uppercase">Bulk Pricing</div>
-            </div>
-          </div>
+        {/* Indicators */}
+        <div className="flex gap-3 mt-20">
+          {HERO_SLIDES.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              className={`h-1.5 transition-all duration-500 rounded-full ${
+                current === idx ? "w-12 bg-navy" : "w-3 bg-navy/20"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
