@@ -12,7 +12,6 @@ import { ScrollProvider } from "@/components/ScrollProvider";
 export default function Home() {
   return (
     <ScrollProvider>
-      <Navbar />
       <HeroSection />
       <TrustBar />
       <CategoriesSection />
@@ -20,7 +19,6 @@ export default function Home() {
       <WhyChooseSection />
       <InquirySection />
       <RetailSection />
-      <Footer />
     </ScrollProvider>
   );
 }
