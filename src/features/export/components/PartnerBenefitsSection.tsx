@@ -19,7 +19,7 @@ export default function PartnerBenefitsSection() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <h2 className="text-3xl font-serif text-navy mb-6">Why Choose Lotus International?</h2>
+            <h2 className="text-3xl font-serif text-navy mb-6">Why Choose Liberty Pharmacy International?</h2>
             <p className="text-brand-gray mb-8">
               Buyer's choose us for our 30+ years of trade experience, transparent commercial proposals, and dedicated documentation team. We focus on stable supply relationships, not one-time transactions.
             </p>

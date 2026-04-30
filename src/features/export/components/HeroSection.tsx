@@ -14,7 +14,7 @@ export default function HeroSection() {
             <span className="text-teal italic">Export Partner</span>
           </h1>
           <p className="text-xl text-brand-gray mb-10 animate-fade-up-2 leading-relaxed max-w-2xl">
-            Lotus International is a Government recognized **Two Star Export House** with over 30 years of expertise supplying branded and generic medicines worldwide.
+            Liberty Pharmacy is a Government recognized **Two Star Export House** with over 30 years of expertise supplying branded and generic medicines worldwide.
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-up-3">
             <button className="bg-navy text-white px-8 py-4 rounded-lg font-semibold hover:bg-navy-muted transition-all flex items-center gap-2 shadow-lg shadow-navy/20">
