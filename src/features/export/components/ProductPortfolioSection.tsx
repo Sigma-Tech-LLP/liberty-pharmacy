@@ -61,7 +61,7 @@ export default function TabularExportExplorer() {
       <div className={`p-2 md:p-2.5 rounded-lg transition-colors shrink-0 ${
         activeId === cat.id ? 'bg-teal text-white' : 'bg-slate-200 text-slate-500'
       }`}>
-        {React.cloneElement(cat.icon as React.ReactElement, { size: 16 })}
+        {React.cloneElement(cat.icon as React.ReactElement<{ size: number  }>, { size: 16 })}
       </div>
       
       <div className="text-left">
@@ -151,7 +151,7 @@ function CapabilityCard({ title, label, icon }: { title: string, label: string, 
   return (
     <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/5 group hover:border-teal/50 hover:bg-white/[0.06] transition-all duration-300">
       <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center text-teal mb-4 group-hover:bg-teal group-hover:text-[#0F1E35] transition-all duration-300">
-        {React.cloneElement(icon as React.ReactElement, { size: 20 })}
+        {React.cloneElement(icon as React.ReactElement<{ size: number }>, { size: 20 })}
       </div>
       <p className="text-white font-bold text-sm">{title}</p>
       <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1 group-hover:text-teal/80 transition-colors">
