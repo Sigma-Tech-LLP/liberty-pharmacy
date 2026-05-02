@@ -21,11 +21,11 @@ export default function PartnerBenefitsSection() {
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl font-serif text-navy mb-6">Why Choose Liberty Pharmacy International?</h2>
             <p className="text-brand-gray mb-8">
-              Buyer's choose us for our 30+ years of trade experience, transparent commercial proposals, and dedicated documentation team. We focus on stable supply relationships, not one-time transactions.
+              Buyer's choose us for our 15+ years of trade experience, transparent commercial proposals, and dedicated documentation team. We focus on stable supply relationships, not one-time transactions.
             </p>
             <div className="grid grid-cols-2 gap-6">
               <div className="p-6 bg-navy text-white rounded-2xl">
-                <div className="text-2xl font-bold text-teal-light">30+ Years</div>
+                <div className="text-2xl font-bold text-teal-light">15+ Years</div>
                 <p className="text-xs opacity-70">Experience</p>
               </div>
               <div className="p-6 border border-border bg-white rounded-2xl">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Globe, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -8,12 +8,12 @@ import { WHATSAPP_URL } from "@/lib/constants";
 
 const HERO_SLIDES = [
   {
-    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?q=90&w=2000&auto=format&fit=crop",
+    image: "https://plus.unsplash.com/premium_photo-1682310231531-148748e7684f?q=80&w=1812&auto=format&fit=crop",
     title: "Global Merchant Exporter of",
     highlight: "WHO‑GMP Pharmaceuticals",
   },
   {
-    image: "https://images.unsplash.com/photo-1576091160550-2173aaf999ef?q=90&w=2000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1740&auto=format&fit=crop",
     title: "Bridging the Gap in",
     highlight: "Global Healthcare Supply",
   },
@@ -35,8 +35,8 @@ export function HeroSection() {
   }, []);
 
   return (
-    // Added pt-[80px] to account for the fixed Navbar height
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white pt-[80px]">
+    // Changed pt-[80px] to a responsive pt and ensured min-h-screen works with mobile address bars
+    <section className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-white pt-20 md:pt-24">
       
       {/* BACKGROUND CAROUSEL */}
       <div className="absolute inset-0 z-0">
@@ -53,28 +53,28 @@ export function HeroSection() {
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[8000ms] scale-110"
               style={{ backgroundImage: `url(${HERO_SLIDES[current].image})` }}
             />
-            {/* High-visibility clinical overlays */}
-            <div className="absolute inset-0 bg-white/40" /> 
-            <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white" />
+            {/* Improved Gradient Overlays for Mobile Readability */}
+            <div className="absolute inset-0 bg-white/30 md:bg-white/10" /> 
+            <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/60 to-white" />
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* STABLE CONTENT LAYER */}
-      <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center">
+      <div className="relative z-10 container mx-auto px-5 md:px-6 flex flex-col items-center text-center">
         
-        {/* Badge - Now properly spaced from Navbar */}
+        {/* Badge - Adjusted size for mobile */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 bg-navy/5 border border-navy/10 rounded-full px-4 py-2 mb-10 text-[11px] font-bold tracking-[2px] uppercase text-navy"
+          className="inline-flex items-center gap-2 bg-navy/5 border border-navy/10 rounded-full px-3 py-1.5 md:px-4 md:py-2 mb-6 md:mb-10 text-[10px] md:text-[11px] font-bold tracking-[1.5px] md:tracking-[2px] uppercase text-navy"
         >
-          <Globe className="w-3.5 h-3.5 text-teal" />
+          <Globe className="w-3 h-3 md:w-3.5 md:h-3.5 text-teal" />
           India&apos;s Trusted Export Partner
         </motion.div>
 
-        {/* Headline Box with Fixed Height (Prevents jumping buttons) */}
-        <div className="min-h-[160px] md:min-h-[200px] flex flex-col justify-center items-center w-full max-w-[950px]">
+        {/* Headline Box - Height adjusted for smaller screens */}
+        <div className="min-h-[140px] sm:min-h-[180px] md:min-h-[200px] flex flex-col justify-center items-center w-full max-w-[950px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
@@ -84,9 +84,9 @@ export function HeroSection() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="w-full"
             >
-              <h1 className="font-serif text-[clamp(32px,6vw,72px)] font-light leading-[1.1] text-navy">
+              <h1 className="font-serif text-[clamp(28px,8vw,72px)] font-light leading-[1.1] text-navy">
                 {HERO_SLIDES[current].title} <br />
-                <span className="font-bold text-teal block mt-2 tracking-tight">
+                <span className="font-bold text-teal block mt-1 md:mt-2 tracking-tight">
                   {HERO_SLIDES[current].highlight}
                 </span>
               </h1>
@@ -94,43 +94,43 @@ export function HeroSection() {
           </AnimatePresence>
         </div>
 
-        {/* Description - Locked below the headline box */}
+        {/* Description - Adjusted margin and text size */}
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-lg md:text-xl text-brand-gray leading-relaxed max-w-[750px] mt-8 mb-12"
+          className="text-base md:text-xl text-brand-gray leading-relaxed max-w-[700px] mt-6 md:mt-8 mb-8 md:mb-12"
         >
           Sourcing high-quality medicines from India’s top 
           <span className="text-navy font-semibold"> WHO‑GMP & FDA facilities</span>. 
-          Global delivery with complete regulatory compliance.
+          <span className="hidden sm:inline"> Global delivery with complete regulatory compliance.</span>
         </motion.p>
 
-        {/* Buttons - These will no longer "jump" */}
-        <div className="flex gap-4 flex-wrap justify-center">
+        {/* Buttons - Stacked on mobile, side-by-side on tablet/desktop */}
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto px-4 sm:px-0">
           <a
             href="#inquiry"
-            className="bg-navy text-white px-10 py-4 rounded-xl font-bold text-sm tracking-[1px] uppercase no-underline transition-all hover:bg-teal hover:shadow-2xl hover:shadow-navy/20 flex items-center gap-2"
+            className="bg-navy text-white px-8 md:px-10 py-3.5 md:py-4 rounded-xl font-bold text-xs md:text-sm tracking-[1px] uppercase no-underline transition-all hover:bg-teal hover:shadow-xl flex items-center justify-center gap-2"
           >
             Get Quote <ArrowRight size={18} />
           </a>
           <a
             href={WHATSAPP_URL}
-            className="bg-white border border-border text-navy px-8 py-4 rounded-xl font-bold text-sm uppercase no-underline flex items-center gap-2.5 transition-all hover:bg-light-bg active:scale-95"
+            className="bg-white/80 backdrop-blur-sm border border-border text-navy px-8 py-3.5 md:py-4 rounded-xl font-bold text-xs md:text-sm uppercase no-underline flex items-center justify-center gap-2.5 transition-all hover:bg-white active:scale-95"
           >
             <WhatsAppIcon size={20} />
             WhatsApp Us
           </a>
         </div>
 
-        {/* Indicators */}
-        <div className="flex gap-3 mt-20">
+        {/* Indicators - Scaled down for mobile */}
+        <div className="flex gap-2.5 md:gap-3 mt-12 md:mt-20">
           {HERO_SLIDES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrent(idx)}
               className={`h-1.5 transition-all duration-500 rounded-full ${
-                current === idx ? "w-12 bg-navy" : "w-3 bg-navy/20"
+                current === idx ? "w-8 md:w-12 bg-navy" : "w-2 md:w-3 bg-navy/20"
               }`}
             />
           ))}

@@ -43,7 +43,7 @@ export default function ExportProcessSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-8 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mb-16">
           <span className="text-teal font-mono text-[10px] tracking-[0.3em] uppercase mb-4 block">
@@ -111,7 +111,7 @@ export default function ExportProcessSection() {
         </div>
 
         {/* Floating Summary Bar */}
-        <div className="mt-20 p-6 bg-light-bg rounded-2xl border border-border flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-14 p-6 bg-light-bg rounded-2xl border border-border flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="w-2 h-2 rounded-full bg-teal animate-pulse" />
             <p className="text-sm font-medium text-navy-muted">

@@ -5,7 +5,7 @@ export function Logo() {
         L
       </div>
       <div className="leading-[1.1]">
-        <span className="block font-serif text-lg font-bold tracking-[0.5px] text-off-white">
+        <span className="block font-serif text-lg font-bold tracking-[0.5px] text-[#0D8B8B]">
           Liberty Medical
         </span>
         <span className="text-[10px] font-medium tracking-[2px] text-teal uppercase">
