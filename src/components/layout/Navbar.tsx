@@ -6,10 +6,12 @@ import { Logo } from "./Logo";
 import { NAV_LINKS } from "@/lib/constants";
 import { Menu, X, ArrowRight, Globe, PhoneCall } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathName = usePathname()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -46,18 +48,28 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             <ul className="flex items-center gap-8 list-none m-0 p-0">
-              {NAV_LINKS.map((link) => (
-                <li key={link.label}>
-                  {/* 3. Desktop Links updated */}
+              {NAV_LINKS.map((link) => {
+                const isActive = pathName === link.href;
+
+                return (
+                <li key={link.label} className="relative">
                   <Link
                     href={link.href}
-                    className="text-[11px] font-bold tracking-[2px] uppercase transition-all hover:text-[#0D8B8B]"
-                    style={{ color: '#0F4C81' }}
+                    className={`text-[11px] font-bold tracking-[2px] uppercase transition-all hover:text-[#0D8B8B] 
+                      ${isActive ? "text-[#0D8B8B]" : "text-[#0F4C81]"}`}
                   >
                     {link.label}
                   </Link>
+                  {isActive && (
+                    <motion.div 
+                      layoutId="activeNav"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#0D8B8B]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </li>
-              ))}
+              )
+              })}
             </ul>
 
             {/* 4. Desktop CTA updated */}

@@ -1,14 +1,14 @@
 "use client";
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe } from 'lucide-react';
 
 const regions = [
-  { name: "CIS Countries", desc: "Oncology, antivirals, and specialty meds for Central Asia." },
-  { name: "African Countries", desc: "Bulk supply for West, East, and Central Africa with documentation." },
-  { name: "Latin America", desc: "Branded and generic formulations for distributors and agencies." },
-  { name: "South East Asia", desc: "Competitively priced bulk pharmaceutical supplies for wholesalers." },
-  { name: "Middle East", desc: "Chronic care, oncology, and vaccines for GCC and surrounding countries." }
+  { name: "Africa", desc: "Serving Nigeria, Kenya, Ghana, and Ethiopia with bulk supply and full documentation." },
+  { name: "Middle East", desc: "Reliable partner for UAE, Saudi Arabia, Qatar, and Kuwait healthcare providers." },
+  { name: "South East Asia", desc: "Supplying Philippines, Vietnam, and Myanmar with competitively priced generics." },
+  { name: "South Asia", desc: "Deep logistics network across Nepal, Bangladesh, Sri Lanka, and Maldives." },
+  { name: "CIS & Emerging Markets", desc: "Specialized supply chains for Kazakhstan, Uzbekistan, and Latin America." }
 ];
 
 export default function GlobalNetworkSection() {

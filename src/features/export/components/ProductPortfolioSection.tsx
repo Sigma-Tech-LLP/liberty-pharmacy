@@ -8,28 +8,28 @@ import {
 
 const categoryData = [
   {
-    id: "onc",
-    title: "Oncology",
-    desc: "Global supply of cytotoxic drugs and biosimilars for regulated markets.",
+    id: "pharma",
+    title: "Pharmaceuticals",
+    desc: "Comprehensive range of Tablets, Capsules, Injections, and Syrups sourced from WHO-GMP plants.",
     icon: <Activity />,
-    features: ["Cytotoxics", "Targeted Therapy"],
-    stats: { capacity: "500k units/mo", compliance: "EU-GMP" }
+    features: ["Tablets & Capsules", "IV Fluids", "Topicals"],
+    stats: { capacity: "Bulk Orders", compliance: "CDSCO Approved" }
   },
   {
-    id: "vac",
-    title: "Vaccines",
-    desc: "Validated cold chain logistics for EPI and specialty vaccines (+2°C to +8°C).",
-    icon: <ThermometerSnowflake />,
-    features: ["EPI Vaccines", "Validated Packing"],
-    stats: { capacity: "200k vials/mo", compliance: "WHO-PQ" }
+    id: "sur",
+    title: "Surgical & Kits",
+    desc: "Quality disposable items, diagnostic kits, and medical equipment for hospitals.",
+    icon: <ShieldCheck />,
+    features: ["Disposables", "Diagnostic Kits", "Equipment"],
+    stats: { capacity: "Institutional Supply", compliance: "ISO Certified" }
   },
   {
-    id: "chr",
-    title: "Chronic Care",
-    desc: "High-volume cardiovascular and diabetic management formulations.",
+    id: "well",
+    title: "Wellness/OTC",
+    desc: "Nutraceuticals, Ayurvedic wellness, and premium mother & baby care products[cite: 1].",
     icon: <Beaker />,
-    features: ["Statins", "Antidiabetics"],
-    stats: { capacity: "1M+ tablets/mo", compliance: "ISO 9001" }
+    features: ["Vitamins", "Ayurvedic", "Pediatric"],
+    stats: { capacity: "Retail & Bulk", compliance: "Noble Living" }
   }
 ];
 
@@ -38,13 +38,13 @@ export default function TabularExportExplorer() {
   const activeData = categoryData.find(c => c.id === activeId) || categoryData[0];
 
   return (
-    <section className="py-12 md:py-24 bg-white px-4 md:px-[60px]">
+    <section className="py-8 md:py-12 bg-white px-4 md:px-[60px]">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <div className="mb-10 text-center md:text-left">
+        <div className="mb-2 text-center md:text-left">
           <span className="text-teal text-[10px] font-black uppercase tracking-[0.3em] mb-3 block">Supply Verticals</span>
-          <h2 className="text-3xl md:text-5xl font-serif text-navy">Export Portfolio</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-navy">Categories We Export</h2>
         </div>
 
         {/* TABULAR BUTTON BAR */}

@@ -52,7 +52,7 @@ export default function StorySection() {
             
             <div className="mt-12 animate-fade-up-4">
               <button className="group relative h-14 px-8 rounded-full bg-navy text-white font-sans font-bold text-sm transition-all duration-500 flex items-center gap-3 overflow-hidden shadow-2xl shadow-navy/20">
-                <span className="relative z-10">Explore Our Export Vision[cite: 1]</span>
+                <span className="relative z-10">Explore Our Export Vision</span>
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                 <div className="absolute inset-0 bg-teal translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </button>

@@ -1,4 +1,4 @@
-import { ShieldCheck, ArrowRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -7,18 +7,21 @@ export default function HeroSection() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 py-1 px-3 mb-6 text-xs font-bold tracking-[0.2em] text-teal bg-teal/10 rounded-full animate-fade-up">
-            <ShieldCheck size={14} /> ISO 9001:2015 CERTIFIED
+            <ShieldCheck size={14} /> WHO-GMP COMPLIANT SOURCING
           </div>
           <h1 className="text-5xl lg:text-7xl font-serif font-medium text-navy mb-8 animate-fade-up-1 leading-[1.1]">
-            Global Bulk Medicine <br /> 
-            <span className="text-teal italic">Export Partner</span>
+            From Bandra to the World: <br /> 
+            <span className="text-teal italic">Global Pharma Export</span>
           </h1>
           <p className="text-xl text-brand-gray mb-10 animate-fade-up-2 leading-relaxed max-w-2xl">
-            Liberty Pharmacy is a Government recognized **Two Star Export House** with over 30 years of expertise supplying branded and generic medicines worldwide.
+            Liberty Medical & Super Market is a Government recognized **Two Star Export House**. We bridge the gap between India's world-class manufacturing and global healthcare needs.
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-up-3">
             <button className="bg-navy text-white px-8 py-4 rounded-lg font-semibold hover:bg-navy-muted transition-all flex items-center gap-2 shadow-lg shadow-navy/20">
-              Submit Export Enquiry <ArrowRight size={18} />
+              Get Export Quote <ArrowRight size={18} />
+            </button>
+            <button className="border border-navy text-navy px-8 py-4 rounded-lg font-semibold hover:bg-slate-50 transition-all">
+              View Product List
             </button>
           </div>
         </div>

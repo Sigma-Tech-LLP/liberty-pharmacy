@@ -98,7 +98,7 @@ export function InquirySection() {
 
                 <div className="space-y-1">
                   <label className="text-[10px] font-black uppercase tracking-[1px] text-teal block">WhatsApp</label>
-                  <input type="tel" name="phone" className={INPUT_STYLE} placeholder="+1..." required />
+                  <input type="tel" name="phone" className={INPUT_STYLE} placeholder="+1 .." required />
                 </div>
 
                 <div className="space-y-1">
