@@ -6,11 +6,11 @@ const carouselMedia = [
   {
     type: 'video',
     src: '/assets/hero-supply-chain.mp4',
-    fallback: 'https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?auto=format&fit=crop&q=80'
+    fallback: 'https://plus.unsplash.com/premium_photo-1661770294094-06167872e079?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGRydWd8ZW58MHx8MHx8fDA%3D'
   },
   {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1579165466541-74e24690554a?auto=format&fit=crop&q=80',
+    src: 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D       ',
   },
   {
     type: 'image',
