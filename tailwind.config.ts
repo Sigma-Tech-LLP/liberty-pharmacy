@@ -40,6 +40,10 @@ export default {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         "fade-up": "fadeUp 0.8s ease both",
@@ -50,6 +54,7 @@ export default {
         "fade-up-5": "fadeUp 1s ease 0.5s both",
         "pulse-dot": "pulse 2s infinite",
         "trust-scroll": "trustScroll 22s linear infinite",
+        'marquee': 'marquee 30s linear infinite',
       },
     },
   },

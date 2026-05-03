@@ -13,16 +13,13 @@ export const COMPANY = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "About Us", href: "#about" },
-  { label: "Products", href: "#product" },
+  { label: "About Us", href: "about-us" },
+  { label: "Products", href: "product" },
   { label: "Export", href: "export" },
-  { label: "Contact", href: "#inquiry" },
 ] as const;
 
 export const FOOTER_LINKS = [
-  { label: "Products", href: "#categories" },
-  { label: "How It Works", href: "#process" },
-  { label: "Why Us", href: "#why" },
-  { label: "Inquiry", href: "#inquiry" },
-  { label: "Retail", href: "#retail" },
+  { label: "About Us", href: "about-us" },
+  { label: "Products", href: "product" },
+  { label: "Export", href: "export" },
 ] as const;

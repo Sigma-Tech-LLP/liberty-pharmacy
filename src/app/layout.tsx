@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProvider } from "@/components/ScrollProvider";
 
 export const metadata: Metadata = {
   title: "Liberty Medical – Global Pharmaceutical Export",
@@ -28,9 +29,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans bg-navy text-off-white overflow-x-hidden">
-        <Navbar />
-        {children}
-        <Footer />
+        <ScrollProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          </ScrollProvider>
         <Toaster position="bottom-right" richColors theme="dark" />
         <Analytics />
       </body>

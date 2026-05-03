@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link"; // 1. Import Link
 import { Logo } from "./Logo";
 import { NAV_LINKS } from "@/lib/constants";
 import { Menu, X, ArrowRight, Globe, PhoneCall } from "lucide-react";
@@ -16,7 +17,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -38,35 +38,37 @@ export function Navbar() {
             : "w-full px-6 lg:px-[60px] py-5 md:py-8 bg-white border-b border-slate-100"
           }`}
         >
-          <a href="/" className="relative z-[1001] transition-transform active:scale-95">
+          {/* 2. Logo Link updated */}
+          <Link href="/" className="relative z-[1001] transition-transform active:scale-95">
             <Logo />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             <ul className="flex items-center gap-8 list-none m-0 p-0">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a
+                  {/* 3. Desktop Links updated */}
+                  <Link
                     href={link.href}
                     className="text-[11px] font-bold tracking-[2px] uppercase transition-all hover:text-[#0D8B8B]"
                     style={{ color: '#0F4C81' }}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
 
-            <a
-              href="#inquiry"
+            {/* 4. Desktop CTA updated */}
+            <Link
+              href="/contact"
               className="bg-[#0F4C81] text-white px-7 py-3.5 rounded-full font-bold text-[10px] tracking-[2px] uppercase flex items-center gap-2 hover:bg-[#0D8B8B] hover:shadow-lg hover:shadow-navy/10 transition-all"
             >
               Get Quote <ArrowRight size={14} />
-            </a>
+            </Link>
           </div>
 
-          {/* Mobile Toggle Button */}
           <button 
             className="lg:hidden relative z-[1001] w-12 h-12 flex items-center justify-center rounded-full bg-slate-50 text-[#0F4C81] border border-slate-100 transition-all active:scale-90" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -77,7 +79,6 @@ export function Navbar() {
         </nav>
       </header>
 
-      {/* --- Mobile Menu Overlay --- */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -86,12 +87,9 @@ export function Navbar() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[998] bg-white lg:hidden"
           >
-            {/* Background Decorative Gradient */}
             <div className="absolute top-0 right-0 w-[80%] h-[60%] bg-gradient-to-bl from-teal/10 via-transparent to-transparent -z-10 rounded-bl-full blur-3xl" />
 
             <div className="flex flex-col h-full pt-32 pb-12 px-8 max-w-md mx-auto">
-              
-              {/* Mobile Links */}
               <ul className="flex flex-col gap-8 list-none p-0 m-0 flex-grow">
                 {NAV_LINKS.map((link, i) => (
                   <motion.li 
@@ -100,7 +98,8 @@ export function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1, ease: "easeOut" }}
                   >
-                    <a
+                    {/* 5. Mobile Links updated */}
+                    <Link
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className="group flex items-baseline gap-4"
@@ -109,12 +108,11 @@ export function Navbar() {
                       <span className="text-4xl md:text-5xl font-serif text-[#0F4C81] group-hover:text-[#0D8B8B] transition-colors">
                         {link.label}
                       </span>
-                    </a>
+                    </Link>
                   </motion.li>
                 ))}
               </ul>
 
-              {/* Bottom Section: Info & CTA */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -136,13 +134,14 @@ export function Navbar() {
                   </div>
                 </div>
 
-                <a
-                  href="#inquiry"
+                {/* 6. Mobile CTA updated */}
+                <Link
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full bg-[#0F4C81] text-white py-5 rounded-2xl font-bold text-xs tracking-[2px] uppercase flex items-center justify-center gap-3 active:scale-[0.98] transition-all shadow-xl shadow-navy/20"
                 >
                   Request Bulk Quotation <ArrowRight size={18} />
-                </a>
+                </Link>
               </motion.div>
             </div>
           </motion.div>

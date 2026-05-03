@@ -1,6 +1,3 @@
-import { Footer } from '@/components/layout/Footer';
-import { Navbar } from '@/components/layout/Navbar';
-import { ScrollProvider } from '@/components/ScrollProvider';
 import DocumentationBannerSection from '@/features/export/components/DocumentationBannerSection';
 import ExportProcessSection from '@/features/export/components/ExportProcessSection';
 import GlobalNetworkSection from '@/features/export/components/GlobalNetworkSection';
@@ -10,7 +7,7 @@ import ProductPortfolioSection from '@/features/export/components/ProductPortfol
 
 export default function ExportPage() {
   return (
-    <ScrollProvider>
+    <>
     <div className="bg-off-white min-h-screen selection:bg-teal/20 selection:text-navy">
       <HeroSection />
       <GlobalNetworkSection />
@@ -19,6 +16,6 @@ export default function ExportPage() {
       <PartnerBenefitsSection />
       <DocumentationBannerSection />
     </div>
-    </ScrollProvider>
+    </>
   );
 }
